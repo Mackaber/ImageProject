@@ -1,0 +1,75 @@
+<?php include 'header.php' ?>
+
+      	<div class="row">
+      	<!-- FOTO -->
+		  <div class="col-sm-6 col-md-6">
+		    <a href="#" class="thumbnail">
+		      <img src="http://placehold.it/720x500" alt="...">
+		    </a>
+		  </div>
+		  <div class="col-sm-6 col-md-6">
+		  	<div class="pull-right">
+				  <a href="#"><span class="glyphicon glyphicon-star" style="font-size: 30px;" ></span></a>
+			</div>
+			<br>
+		  	<h3>Some Title</h3>
+		  	<br>
+		  	<p style="text-align:right">
+		  		Aenean lacinia bibendum nulla sed consectetur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. 
+		  		Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. 
+		  		Curabitur blandit tempus porttitor. 
+		  		Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		  	</p>
+		  </div>
+		</div>
+
+		  <br>  	
+		  	<h3 class="pull-left">Comentarios</h3>
+		  	<br>
+				<div>
+			  		<form>
+			  			<textarea class="form-control" rows="3"></textarea>
+			  			<br>
+			  			<button class="btn btn-default pull-left">Comentar</button>
+			  		</form>
+			  	</div>
+		  	<br>
+		  	<br>
+		  	<div>
+			  	<table class="table">
+			  		<tr>
+			  			<td><h4>Comenter</h4></td>
+			  			<td>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. 
+			  				Curabitur blandit tempus porttitor. 
+			  				Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+			  				Cras mattis consectetur purus sit amet fermentum. 
+			  				Donec ullamcorper nulla non metus auctor fringilla.
+			  			</td>
+			  		</tr>
+			  	</table>
+		  	</div>	
+		  </div>
+		</div>
+
+<?php include 'bottom.php' ?>
+
+<?php 
+
+// Pseudocode
+
+//$image_id = $_GET["image_id"];
+
+//$sql = "SELECT * from Imagenes WHERE id=$image_id";
+
+//SQL LOGIC Here
+
+
+//Image
+
+
+//Image Infos
+
+//Comments
+
+?>
+

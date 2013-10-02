@@ -25,14 +25,75 @@
 
   <body style="">
 	
-  	<?php 
-  		if(!$_SESSION['logged']){ 
-  			echo 'Welcome, '.$_SESSION['username']; 
-		} else {
-			include 'signup-login.php';
-		}
+  	<!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Login/Signup</h4>
+        </div>
+        <div class="modal-body">
+        <div class="row">
 
-  	?>
+          <div class="col-md-6">
+          	<h3>Sign up</h3>
+          	<br>
+          	<form class="form-horizontal" role="form">
+			  <div class="form-group">
+			    <div class="col-lg-10">
+			      <input type="email" class="form-control" id="email" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-lg-10">
+			      <input type="email" class="form-control" id="username" placeholder="Username">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-lg-10">
+			      <input type="password" class="form-control" id="password" placeholder="Password">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-lg-10">
+			      <input type="password" class="form-control" id="password_confirm" placeholder="Repeat password">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-lg-offset-2 col-lg-10">
+			      <button type="submit" class="btn btn-default">Sign up</button>
+			    </div>
+			  </div>
+			</form>
+          </div>
+
+          <div class="col-md-6">
+	          	<form class="form-horizontal" role="form" action="validate.php" method="post" >
+				  <div class="form-group">
+				  	<h3>Login</h3>
+				  	<br>
+				    <div class="col-lg-10">
+				      <input type="email" class="form-control" id="email" placeholder="Email">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-lg-10">
+				      <input type="password" class="form-control" id="password" placeholder="Password">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-lg-offset-2 col-lg-10">
+				      <button type="submit" class="btn btn-default">Sign in</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -49,9 +110,16 @@
             <!-- <li class="active"><a href="#">Login</a></li>
             <li><a href="#">About</a></li> -->
           </ul>
-          <ul class="nav navbar-nav pull-right">
-          	<li><a data-toggle="modal" href="#myModal">Login/Signup</a></li>
-          </ul>
+          <?php 
+		  		if(!$_SESSION['logged']){ 
+		  			echo "<ul class='nav navbar-nav pull-right'>
+							<li><a data-toggle='modal' href='#myModal'>Login/Signup</a></li>
+						</ul>";
+				} else {
+					echo 'Welcome, '.$_SESSION['username']; 
+				}
+
+		  	?>
         </div><!--/.nav-collapse -->
       </div>
     </div>

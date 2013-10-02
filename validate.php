@@ -23,6 +23,7 @@ if(isset($_POST['submit'])){
         WHERE username='$usr' AND 
         password='$pas' 
         LIMIT 1"); 
+
     if(mysql_num_rows($sql) == 1){ 
         $row = mysql_fetch_array($sql); 
         session_start(); 
@@ -36,6 +37,7 @@ if(isset($_POST['submit'])){
         header("Location: index.php"); 
         exit; 
     } 
+    
 }else{    //If the form button wasn't submitted go to the index page, or login page 
     header("Location: index.php");     
     exit; 

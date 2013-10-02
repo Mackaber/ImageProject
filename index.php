@@ -1,5 +1,6 @@
-<?php include 'header.php' ?>
+<?php include 'header.php'; ?>
 
+	<div class="row">
 	<?php
 		if(!($db=mysql_connect('localhost','root',''))){
 			echo("Error con");
@@ -9,25 +10,31 @@
 			echo("Error al seleccionar la base de datos");
 		}
 
-		$query = "SELECT * FROM productos";
+		$query = "SELECT * FROM fotos";
 		$result = mysql_query($query) or die ("falla en query");
 
-		echo("<table border=1>");
 		while($line = mysql_fetch_array($result,MYSQL_ASSOC)){
-			echo("<tr>");
-			foreach($line as $col_value){
-				echo("<td>");
-					print("$col_value");
-				echo("</td>");
-			}
-			echo("<td>");
-				echo("<img src='imagenes/$col_value'");
-			echo("</td>");
-			echo("</tr>");
+			$id = $line['id'];
+			$titulo = $line['titulo'];
+			$file = $line['file'];
+			$descripcion = $line['descripcion'];
+
+
+			echo "<div class='col-sm-6 col-md-3'>
+	    				<div class='thumbnail'>";
+	    	echo "<a href='show.php?imagen_id=$id'>";
+	    	echo "<img src='imagenes/$file'>";
+	    	echo "</a>";
+	    	echo "<h3><a href='show.php?imagen_id=$id'>$titulo</a></h3>";
+	    	echo "<p>$descripcion</p>";
+		    echo 		"</div>
+		    		</div>
+		 		 </div>
+				</div>";
+
 		}
 		mysql_free_result($result);
 		mysql_close($db);
 
 	?>
-
-<?php include 'bottom.php' ?>
+<?php include 'bottom.php'; ?>

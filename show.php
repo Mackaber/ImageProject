@@ -1,5 +1,32 @@
 <?php include 'header.php' ?>
 
+<?php 
+
+	$imagen = $_GET["imagen_id"];
+
+	echo "$imagen";
+
+	if(!($db=mysql_connect('localhost','root',''))){
+		echo("Error con");
+	}
+
+	if(!mysql_select_db('db1150184',$db)){
+		echo("Error al seleccionar la base de datos");
+	}
+
+	$query = "SELECT * FROM fotos where id=$imagen";
+	$result = mysql_query($query) or die ("falla en query");
+
+	while($line = mysql_fetch_array($result,MYSQL_ASSOC)){
+		$file = $line['file'];
+		echo "<img src='imagenes/$file' alt='...'>	";
+	}
+
+	mysql_free_result($result);
+	mysql_close($db);
+
+?>
+
       	<div class="row">
       	<!-- FOTO -->
 		  <div class="col-sm-6 col-md-6">
@@ -51,25 +78,32 @@
 		  </div>
 		</div>
 
-<?php include 'bottom.php' ?>
+<?php include 'bottom.php'; ?>
 
 <?php 
 
-// Pseudocode
+	$imagen = $_GET["imagen_id"];
 
-//$image_id = $_GET["image_id"];
+	echo "$imagen";
 
-//$sql = "SELECT * from Imagenes WHERE id=$image_id";
+	if(!($db=mysql_connect('localhost','root',''))){
+		echo("Error con");
+	}
 
-//SQL LOGIC Here
+	if(!mysql_select_db('db1150184',$db)){
+		echo("Error al seleccionar la base de datos");
+	}
 
+	$query = "SELECT * FROM fotos where id=$imagen";
+	$result = mysql_query($query) or die ("falla en query");
 
-//Image
+	while($line = mysql_fetch_array($result,MYSQL_ASSOC)){
+		$file = $line['file'];
+		echo "<img src='imagenes/$file' alt='...'>	";
+	}
 
-
-//Image Infos
-
-//Comments
+	mysql_free_result($result);
+	mysql_close($db);
 
 ?>
 

@@ -37,12 +37,12 @@ if(isset($_POST['submit'])){
         echo $_SESSION['logged'];
         exit; 
     }else{ 
-        header("Location: error.php?error=Contraseña Incorrecta"); 
+        header("Location: index.php?mensaje=Contraseña Incorrecta"); 
         exit; 
     } 
     
 }else{    //If the form button wasn't submitted go to the index page, or login page 
-    header("Location: error.php?error=No se presiono el boton de login");   
+    header("Location: index.php?mensaje=No se presiono el boton de login");   
     exit; 
 } 
 ?>

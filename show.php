@@ -3,6 +3,7 @@
 <?php 
 
 	$imagen = $_GET["imagen_id"];
+	$current_user_id = $_SESSION['user_id'];
 
 	if(!($db=mysql_connect('localhost','root',''))){
 		echo("Error con");
@@ -18,6 +19,7 @@
 
 	echo "<div class='row'>";
 	while($line = mysql_fetch_array($result,MYSQL_ASSOC)){
+		$id = $line['id'];
 		$file = $line['file'];
 		$titulo = $line['titulo'];
 		$descripcion = $line['descripcion'];
@@ -31,11 +33,22 @@
 		echo "<div class='col-sm-6 col-md-6'>";
 		echo "<div class='pull-right'>";
 		echo "<div class='row'>";
+
+		//Si es dueño de la imagen la puede borrar
 		if ($_SESSION['user_id'] == $user_id) {
 			echo "<a class='btn btn-danger col-md-8' href='delete.php?foto_id=$imagen'>DELETE</a>";
 		}
 
-		echo	 "<a class='col-md-1' href='#'><span class='glyphicon glyphicon-star' style='font-size: 30px;' ></span></a>";
+		//Funcion para saber si la imagen esta favoriteada
+		$query2 = mysql_query("SELECT id FROM favoritos where user_id=$current_user_id AND foto_id=$id LIMIT 1");
+		$result2 = mysql_fetch_array($query2);
+
+		if($result2[0] > 0){
+			echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star' style='font-size: 30px;' ></span></a>";
+		}else{
+			echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star-empty' style='font-size: 30px;' ></span></a>";
+	
+		}
 		echo 	  "</div>";
 		echo "</div>";
 		echo "<br>";
@@ -52,12 +65,15 @@
 
 ?>
 
-<br>  	
-	  	<h3 class="pull-left">Comentarios</h3>
+<h3 class="pull-left">Comentarios</h3>
 	  	<br>
 			<div>
-		  		<form>
-		  			<textarea class="form-control" rows="3"></textarea>
+		  		<form action="submit_comment.php" method="post" >
+		  			<textarea name="comentario" class="form-control" rows="3"></textarea>
+		  			<?php
+		  				$imagen = $_GET["imagen_id"]; 
+		  				echo "<input type='hidden' value='$imagen' name='foto_id' >" 
+		  			?>
 		  			<br>
 		  			<button class="btn btn-default pull-left">Comentar</button>
 		  		</form>
@@ -65,19 +81,39 @@
 	  	<br>
 	  	<br>
 	  	<div>
-		  	<table class="table">
-		  		<tr>
-		  			<td><h4>Comenter</h4></td>
-		  			<td>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. 
-		  				Curabitur blandit tempus porttitor. 
-		  				Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-		  				Cras mattis consectetur purus sit amet fermentum. 
-		  				Donec ullamcorper nulla non metus auctor fringilla.
-		  			</td>
-		  		</tr>
+		  	<table class="table" style="text-align:left;">
+		  		<?php
+		  			$imagen = $_GET["imagen_id"];
+
+			  		if(!($db=mysql_connect('localhost','root',''))){
+						echo("Error con");
+					}
+
+					if(!mysql_select_db('db1150184',$db)){
+						echo("Error al seleccionar la base de datos");
+					}
+					$query = "SELECT * FROM comentarios where foto_id=$imagen";
+					$result = mysql_query($query) or die ("falla en query");
+
+					while($line = mysql_fetch_array($result,MYSQL_ASSOC)){
+						$user_id = $line['user_id'];
+						$comentario = $line['comentario'];
+
+						$query2 = mysql_query("SELECT nombre FROM usuarios where id=$user_id");
+						$result2 = mysql_fetch_array($query2);
+						$username = $result2[0];
+
+				  		echo "<tr>";
+				  		echo "<td><h4>$username</h4></td>";
+				  		echo 	"<td>";
+				  		echo 		"<p>$comentario</p>";
+				  		echo 	"</td>";
+				  		echo "</tr>";
+			  		}
+		  		?>
 		  	</table>
 	  	</div>	
 	  </div>
-	</div>	
+	</div>		
 
 <?php include 'bottom.php'; ?>

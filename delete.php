@@ -22,8 +22,8 @@
 		// mysql_free_result($result);
 		mysql_close($db);	
 
-		header("Location: index.php"); 
+		header("Location: index.php?mensaje=Su imagen ha sido borrada"); 
 	}else{
-		header("Location: error.php?error=Esta foto no le pertenece"); 	
+		header("Location: index.php?mensaje=Esta foto no le pertenece"); 	
 	}
 ?>

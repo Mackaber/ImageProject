@@ -1,5 +1,5 @@
 <?php include 'header.php'; ?>
-	<h3>My Images</h3>
+	<h3>My Favourites</h3>
 	<div class="row">
 		<?php
 			$user_id = $_SESSION['user_id'];
@@ -12,7 +12,12 @@
 				echo("Error al seleccionar la base de datos");
 			}
 
-			$query = "SELECT * FROM fotos WHERE user_id=$user_id";
+			$query = "SELECT fotos.id,fotos.titulo,fotos.file,fotos.descripcion,favoritos.id f,usuarios.id u 
+					  FROM fotos 
+					  INNER JOIN favoritos ON fotos.id=favoritos.foto_id 
+					  INNER JOIN usuarios ON usuarios.id=favoritos.user_id 
+					  WHERE usuarios.id=$user_id";
+			
 			$result = mysql_query($query) or die ("falla en query");
 
 			while($line = mysql_fetch_array($result,MYSQL_ASSOC)){

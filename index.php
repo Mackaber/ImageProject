@@ -1,5 +1,14 @@
 <?php include 'header.php'; ?>
-
+<?php 
+	if (isset($_GET['mensaje'])){
+		//Para prevenir XSS
+		$mensaje = htmlspecialchars($_GET['mensaje'], ENT_QUOTES, 'UTF-8');
+		echo "<div class='alert alert-warning fade in'>";
+        echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";
+        echo "$mensaje";
+      	echo "</div>";
+	}
+?>
 	<div class="row">
 		<?php
 			if(!($db=mysql_connect('localhost','root',''))){

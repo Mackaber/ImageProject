@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.png">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Imageneer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
@@ -122,7 +122,8 @@
 					echo "	<li class='dropdown'>
 						        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>$nombre<b class='caret'></b></a>
 						        <ul class='dropdown-menu'>
-						          <li><a href='myimages.php?user_id=$user_id'>My Images</a></li>
+						          <li><a href='myimages.php'>My Images</a></li>
+						          <li><a href='myfavourites.php'>My Favourites</a></li>
 						          <li><a data-toggle='modal' href='#uploadModal'>Upload an image</a></li>
 						          <li role='presentation' class='divider'></li>
 						          <li><a href='log_out.php'>Log out</a></li>

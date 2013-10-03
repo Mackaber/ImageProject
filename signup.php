@@ -21,12 +21,14 @@
 			$enc_pass = hash('sha256', mysql_real_escape_string($password)); 
 			$query = "INSERT into usuarios (nombre,password,mail) values ('$user','$enc_pass','$mail')";
 			$result = mysql_query($query) or die ("Error");
+
+			header("Location: index.php?mensaje=Ahora puedes hacer Login"); 
 		}else{
-			header("Location: error.php?error=Las contraseñas no coinciden"); 
+			header("Location: index.php?mensaje=Las contraseñas no coinciden"); 
 		}
 	}
 	else {
-		header("Location: error.php?error=Este email ya ha sido registrado"); 
+		header("Location: index.php?mensaje=Este email ya ha sido registrado"); 
 	}
 
 ?>

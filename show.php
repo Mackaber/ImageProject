@@ -33,21 +33,22 @@
 		echo "<div class='col-sm-6 col-md-6'>";
 		echo "<div class='pull-right'>";
 		echo "<div class='row'>";
+		if ($_SESSION['logged']){
+			//Si es dueño de la imagen la puede borrar
+			if ($_SESSION['logged'] && ($_SESSION['user_id'] == $user_id)) {
+				echo "<a class='btn btn-danger col-md-8' href='delete.php?foto_id=$imagen'>DELETE</a>";
+			}
 
-		//Si es dueño de la imagen la puede borrar
-		if ($_SESSION['user_id'] == $user_id) {
-			echo "<a class='btn btn-danger col-md-8' href='delete.php?foto_id=$imagen'>DELETE</a>";
-		}
+			//Funcion para saber si la imagen esta favoriteada
+			$query2 = mysql_query("SELECT id FROM favoritos where user_id=$current_user_id AND foto_id=$id LIMIT 1");
+			$result2 = mysql_fetch_array($query2);
 
-		//Funcion para saber si la imagen esta favoriteada
-		$query2 = mysql_query("SELECT id FROM favoritos where user_id=$current_user_id AND foto_id=$id LIMIT 1");
-		$result2 = mysql_fetch_array($query2);
-
-		if($result2[0] > 0){
-			echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star' style='font-size: 30px;' ></span></a>";
-		}else{
-			echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star-empty' style='font-size: 30px;' ></span></a>";
-	
+			if($result2[0] > 0){
+				echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star' style='font-size: 30px;' ></span></a>";
+			}else{
+				echo "<a class='col-md-1' href='favorite.php?foto_id=$imagen'><span class='glyphicon glyphicon-star-empty' style='font-size: 30px;' ></span></a>";
+		
+			}
 		}
 		echo 	  "</div>";
 		echo "</div>";

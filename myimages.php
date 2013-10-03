@@ -2,6 +2,8 @@
 
 	<div class="row">
 		<?php
+			$user_id = $_GET['user_id'];
+
 			if(!($db=mysql_connect('localhost','root',''))){
 				echo("Error con");
 			}
@@ -10,7 +12,7 @@
 				echo("Error al seleccionar la base de datos");
 			}
 
-			$query = "SELECT * FROM fotos";
+			$query = "SELECT * FROM fotos WHERE user_id=$user_id";
 			$result = mysql_query($query) or die ("falla en query");
 
 			while($line = mysql_fetch_array($result,MYSQL_ASSOC)){

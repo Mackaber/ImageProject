@@ -39,25 +39,25 @@
           <div class="col-md-6">
           	<h3>Sign up</h3>
           	<br>
-          	<form class="form-horizontal" role="form">
+          	<form class="form-horizontal" role="form" action="signup.php" method="post" >
 			  <div class="form-group">
 			    <div class="col-lg-10">
-			      <input type="email" class="form-control" id="email" placeholder="Email">
+			      <input name="email" type="email" class="form-control" id="email" placeholder="Email">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <div class="col-lg-10">
-			      <input type="email" class="form-control" id="username" placeholder="Username">
+			      <input name="username" type="text" class="form-control" id="username" placeholder="Username">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <div class="col-lg-10">
-			      <input type="password" class="form-control" id="password" placeholder="Password">
+			      <input name="password" type="password" class="form-control" id="password" placeholder="Password">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <div class="col-lg-10">
-			      <input type="password" class="form-control" id="password_confirm" placeholder="Repeat password">
+			      <input name="password_confirm" type="password" class="form-control" id="password_confirm" placeholder="Repeat password">
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -69,22 +69,22 @@
           </div>
 
           <div class="col-md-6">
-	          	<form class="form-horizontal" role="form" action="validate.php" method="post" >
+	          	<form class="form-horizontal" role="form" action="login.php" method="post" >
 				  <div class="form-group">
 				  	<h3>Login</h3>
 				  	<br>
 				    <div class="col-lg-10">
-				      <input type="email" class="form-control" id="email" placeholder="Email">
+				      <input name="email" type="email" class="form-control" id="email" placeholder="Email">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-lg-10">
-				      <input type="password" class="form-control" id="password" placeholder="Password">
+				      <input name="password" type="password" class="form-control" id="password" placeholder="Password">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-lg-offset-2 col-lg-10">
-				      <button type="submit" class="btn btn-default">Sign in</button>
+				      <button name="submit" type="submit" class="btn btn-default">Sign in</button>
 				    </div>
 				  </div>
 				</form>
@@ -94,7 +94,7 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-
+  	<?php include 'upload-form.php'; ?>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -110,16 +110,28 @@
             <!-- <li class="active"><a href="#">Login</a></li>
             <li><a href="#">About</a></li> -->
           </ul>
-          <?php 
-		  		if(!$_SESSION['logged']){ 
-		  			echo "<ul class='nav navbar-nav pull-right'>
-							<li><a data-toggle='modal' href='#myModal'>Login/Signup</a></li>
-						</ul>";
+          <ul class="nav navbar-nav navbar-right">
+          <?php
+          		$nombre = $_SESSION['nombre'];
+          		$user_id = $_SESSION['user_id'];
+
+		  		if(!$_SESSION['logged']){
+		  			echo "<li><a data-toggle='modal' href='#myModal'>Login/Signup</a></li>";
 				} else {
-					echo 'Welcome, '.$_SESSION['username']; 
+					//echo 'Welcome, '.$_SESSION['username']; 
+					echo "	<li class='dropdown'>
+						        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>$nombre<b class='caret'></b></a>
+						        <ul class='dropdown-menu'>
+						          <li><a href='myimages.php?user_id=$user_id'>My Images</a></li>
+						          <li><a data-toggle='modal' href='#uploadModal'>Upload an image</a></li>
+						          <li role='presentation' class='divider'></li>
+						          <li><a href='log_out.php'>Log out</a></li>
+						        </ul>
+						      </li>";
 				}
 
 		  	?>
+		  	</ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
